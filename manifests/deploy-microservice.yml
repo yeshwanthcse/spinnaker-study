@@ -2,26 +2,26 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
     labels:
-        app: mild-temper-microservice
+        app: alien-origin-microservice
         stack: frontend
         source: demo
-    name: mild-temper-microservice
+    name: alien-origin-microservice
     namespace: microservices
 spec:
     replicas: 5
     selector:
         matchLabels:
-            run: mild-temper-microservice
+            run: alien-origin-microservice
     template:
         metadata:
             labels:
-                app: mild-temper-microservice
-                run: mild-temper-microservice
+                app: alien-origin-microservice
+                run: alien-origin-microservice
                 source: demo
         spec:
             containers:
-                -   image: 219099013464.dkr.ecr.us-west-2.amazonaws.com/mild-temper-microservice
-                    name: mild-temper-microservice
+                -   image: 219099013464.dkr.ecr.us-west-2.amazonaws.com/alien-origin-microservice
+                    name: alien-origin-microservice
                     ports:
                         -   name: web
                             containerPort: 8080
@@ -31,9 +31,9 @@ kind: Service
 apiVersion: v1
 metadata:
     labels:
-        app: mild-temper-microservice-service
+        app: alien-origin-microservice-service
         stack: frontend
-    name: mild-temper-microservice-service
+    name: alien-origin-microservice-service
     namespace: microservices
 spec:
     selector:
@@ -54,7 +54,7 @@ metadata:
         stack: frontend
     annotations:
         nginx.ingress.kubernetes.io/rewrite-target: /$2
-    name: mild-temper-ingress
+    name: alien-origin-ingress
     namespace: microservices
 spec:
     ingressClassName: nginx
@@ -62,10 +62,10 @@ spec:
         -   http:
                 paths:
                     -  pathType: Prefix 
-                       path: /mild-temper(/|$)(.*)
+                       path: /alien-origin(/|$)(.*)
                        backend:
                           service:
-                            name: mild-temper-microservice-service
+                            name: alien-origin-microservice-service
                             port: 
                                number: 30201
 
